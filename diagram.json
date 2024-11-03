@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-v1", "id": "esp", "top": -2.72, "left": -4.8, "attrs": {} },
+    { "type": "chip-gps-neo6m", "id": "chip1", "top": 145.02, "left": 177.6, "attrs": {} },
+    { "type": "wokwi-ds1307", "id": "rtc1", "top": -24.6, "left": 124.9, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "chip1:GND", "esp:GND.1", "black", [ "h-48", "v-19.2" ] ],
+    [ "chip1:VCC", "esp:3V3", "red", [ "h-19.2", "v-67.2" ] ],
+    [ "chip1:TX", "esp:RX2", "purple", [ "h11.41", "v-19.2" ] ],
+    [ "esp:TX2", "chip1:RX", "gray", [ "h210.71", "v67.2" ] ],
+    [ "rtc1:GND", "esp:GND.2", "black", [ "h-163.03", "v221.8" ] ],
+    [ "rtc1:5V", "esp:VIN", "violet", [ "h-152.36", "v22.46" ] ],
+    [ "rtc1:SDA", "esp:D21", "cyan", [ "h19.2", "v-76.7" ] ],
+    [ "rtc1:SCL", "esp:D22", "magenta", [ "h-1.03", "v77.46" ] ]
+  ],
+  "dependencies": {}
+}
