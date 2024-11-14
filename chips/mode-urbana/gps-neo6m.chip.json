@@ -1,0 +1,11 @@
+{
+  "name": "gps-neo6m",
+  "author": "Danang S",
+  "pins": [
+    "VCC",
+    "GND",
+    "RX",
+    "TX"
+  ],
+  "controls": []
+}
