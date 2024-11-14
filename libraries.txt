@@ -3,3 +3,4 @@
 
 TinyGPSPlus
 RTClib
+Firebase ESP32 Client
