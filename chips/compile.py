@@ -51,18 +51,24 @@ with open(CONFIG_TEMPLATE_CHIP_PATH, encoding="utf-8") as fs:
 with open(WOKWI_API_HEADER_PATH, encoding="utf-8") as fs:
     wokwi_api_header = fs.read()
 
+c_suffix = ".c"
+json_suffix = ".json"
+
 # iterates over each .nmea file
 for file in glob.glob(f"{DATA_FOLDER}/**/*.nmea", recursive=True):
+    print("Compiling {}...".format(file))
     file = pathlib.Path(file)
     code = sentencesToCode(file.read_text(encoding="utf-8").splitlines())
     code = template.replace(TEMPLATE_CHIP_DATA, code, 1)
     filename = os.path.splitext(file.name)[0]
 
-    chip_file = out.joinpath(filename, template_name + ".c")
-    config_file = chip_file.with_suffix(".json")
+    chip_file = out.joinpath(filename, template_name + c_suffix)
+    config_file = chip_file.with_suffix(json_suffix)
     header_file = chip_file.parent.joinpath("wokwi-api.h")
 
-    chip_file.parent.mkdir(parents=True, exist_ok=True)
+    store = chip_file.parent
+    store.mkdir(parents=True, exist_ok=True)
+
     chip_file.write_text(code, encoding="utf-8")
     config_file.write_text(config_template, encoding="utf-8")
     header_file.write_text(wokwi_api_header, encoding="utf-8")
